@@ -7,9 +7,23 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <title>Test</title>
     <link rel="manifest" href="manifest.json">
+    <style>
+        #qr-reader {
+            width: 99vw;
+            height: 70vh;
+        }
+        #qr-reader-results {
+            width: 99vw;
+            height: 2em;
+            border: 4px dashed #ccc;
+            font-size: 2em;
+            text-align: center;
+            padding: 1em;
+        }
+    </style>
 </head>
 <body>
-    <div id="qr-reader" style="width:500px"></div>
+    <div id="qr-reader"></div>
     <div id="qr-reader-results"></div>
 </body>
 <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
@@ -30,6 +44,7 @@
 
     docReady(function () {
         var resultContainer = document.getElementById('qr-reader-results');
+        var btStop = document.getElementById('html5-qrcode-button-camera-stop');
         var lastResult, countResults = 0;
         function onScanSuccess(decodedText, decodedResult) {
             if (decodedText !== lastResult) {
@@ -37,6 +52,9 @@
                 lastResult = decodedText;
                 // Handle on success condition with the decoded message.
                 console.log(`Scan result ${decodedText}`, decodedResult);
+                resultContainer.textContent = decodedText;
+                document.getElementById('html5-qrcode-button-camera-stop').click();
+                
             }
         }
 
