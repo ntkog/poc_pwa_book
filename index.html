@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <title>Test</title>
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
     <div id="qr-reader" style="width:500px"></div>
@@ -12,6 +14,9 @@
 </body>
 <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 <script>
+    if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register('./service-worker.js')
+    }
     function docReady(fn) {
         // see if DOM is already available
         if (document.readyState === "complete"
